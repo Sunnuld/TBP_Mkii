@@ -1,0 +1,20 @@
+{
+  "name": "lanbot-mkii",
+  "version": "1.0.0",
+  "description": "TheLanProject Discord Bot",
+  "main": "bot.js",
+  "scripts": {
+    "dev": "nodemon bot.js --ignore db.json"
+  },
+  "author": "Sonny Cannon",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "discord.js": "^12.4.1",
+    "dotenv": "^8.2.0",
+    "lowdb": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
