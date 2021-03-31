@@ -43,8 +43,9 @@ bot.on('guildCreate', (guild) => {
 //Message Triggers
 bot.on('message', (message) => {
   if (message.author.bot) return;
-  if (message.author.id === coneUser)
+  if (message.author.id === coneUser) {
     message.react(message.guild.emojis.cache.get('814520123615739935'));
+  }
 
   if (message.content.startsWith(process.env.ADMIN_IDENTIFIER)) {
     if (!message.member.hasPermission('ADMINISTRATOR')) {
@@ -417,6 +418,12 @@ const setStreamRole = (message, args) => {
 const announce = async (message, args) => {
   if (!args[1]) return message.reply('I need something to announce captain!');
 
+  let image = false;
+
+  if (message.attachments.array().length > 0) {
+    image = true;
+  }
+
   const channel = message.guild.channels.cache.find(
     (channel) => channel.name === args[1]
   );
@@ -450,7 +457,12 @@ const announce = async (message, args) => {
 
   collector.on('collect', (r) => {
     if (r._emoji.name === '👎') return;
-    channel.send(args.slice(2).join(' '));
+
+    if (!image) channel.send(args.slice(2).join(' '));
+
+    channel.send(args.slice(2).join(' '), {
+      files: [message.attachments.array()[0].attachment],
+    });
   });
 };
 
